@@ -8,12 +8,10 @@ import 'package:yabiso_ecommerce/pages/home/home_state.dart';
 import 'package:yabiso_ecommerce/pages/shared_state.dart';
 
 class HomeController extends StateNotifier<HomeState> {
-
   final ProductService _productService = getIt<ProductService>();
   final CartService _cartService = getIt<CartService>();
-  final Ref _ref;
 
-  HomeController(this._ref) : super(const HomeState()) {
+  HomeController() : super(const HomeState()) {
     getTotalCartItems();
     getProducts();
   }
@@ -29,27 +27,10 @@ class HomeController extends StateNotifier<HomeState> {
   }
 
   Future<void> getTotalCartItems() async {
-    final totalItems = await _cartService.getTotalCartCount();
-    final currentShareState = _ref.read(sharedStateProvider);
-    _ref.read(sharedStateProvider.notifier).state = currentShareState.copyWith(totalItems: totalItems);
-  }
-
-  Future<void> addToCart(Product product, WidgetRef ref) async {
-    var item = Cart(
-      productId: product.id!,
-      productName: product.name!,
-      productPhoto: product.photo!,
-      productPrice: product.price!,
-      qty: 1,
-    );
-
-    await _cartService.addToCart(item);
-
-    getTotalCartItems();
-
+    await _cartService.getTotalCartCount();
   }
 }
 
 final homeControllerProvider = StateNotifierProvider<HomeController, HomeState>(
-  (ref) => HomeController(ref),
+  (ref) => HomeController(),
 );

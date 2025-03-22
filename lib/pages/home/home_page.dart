@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yabiso_ecommerce/domain/models/cart.dart';
-import 'package:yabiso_ecommerce/pages/cart/cart_page.dart';
 import 'package:yabiso_ecommerce/pages/home/components/categories_section.dart';
 import 'package:yabiso_ecommerce/pages/home/components/home_banner.dart';
+import 'package:yabiso_ecommerce/pages/home/components/shopping_cart_button.dart';
 import 'package:yabiso_ecommerce/pages/home/home_controller.dart';
-import 'package:yabiso_ecommerce/pages/shared_state.dart';
+import 'package:yabiso_ecommerce/pages/product_detail/product_detail_page.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -14,23 +13,14 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final homeState = ref.watch(homeControllerProvider);
     final homeController = ref.watch(homeControllerProvider.notifier);
-    final sharedState = ref.watch(sharedStateProvider);
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(onPressed: () {}, icon: Icon(Icons.sort)),
-        title: Text("Yabiso ${sharedState.totalCartItems}"),
+        title: Text("Yabiso"),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CartPage()),
-              );
-            },
-            icon: Icon(Icons.shopping_cart),
-          ),
+          ShoppingCartButton(),
         ],
       ),
       body: SingleChildScrollView(
@@ -64,7 +54,18 @@ class HomePage extends ConsumerWidget {
                     final product = homeState.products[index];
                     return SizedBox(
                       child: GestureDetector(
-                        onTap: () => {homeController.addToCart(product, ref)},
+                        onTap:
+                            () => {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => ProductDetailPage(
+                                        productId: product.id!,
+                                      ),
+                                ),
+                              ),
+                            },
                         child: Card(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),

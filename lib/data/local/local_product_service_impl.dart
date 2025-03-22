@@ -12,7 +12,7 @@ class LocalProductServiceImpl extends ProductService {
       photo: "assets/images/products/watch.jpg",
     ),
     Product(
-      id: 1,
+      id: 2,
       name: "Apple iphone",
       price: 200.0,
       description: "Apple watch",
@@ -42,8 +42,8 @@ class LocalProductServiceImpl extends ProductService {
 
   @override
   Future<Product> getProduct(int productId) {
-    // TODO: implement getProduct
-    throw UnimplementedError();
+    var product = products.firstWhere((p) => p.id == productId);
+    return Future.value(product);
   }
 
   @override
