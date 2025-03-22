@@ -9,7 +9,7 @@ class LocalProductServiceImpl extends ProductService {
       price: 200.0,
       description: "Apple watch",
       categoryId: 1,
-      photo: "assets/images/watch.jpg",
+      photo: "assets/images/products/watch.jpg",
     ),
     Product(
       id: 1,
@@ -17,7 +17,7 @@ class LocalProductServiceImpl extends ProductService {
       price: 200.0,
       description: "Apple watch",
       categoryId: 1,
-      photo: "assets/images/iphone.jpg",
+      photo: "assets/images/products/iphone.jpg",
     ),
     Product(
       id: 3,
@@ -25,7 +25,7 @@ class LocalProductServiceImpl extends ProductService {
       price: 200.0,
       description: "Apple watch",
       categoryId: 1,
-      photo: "assets/images/airpod.jpg",
+      photo: "assets/images/products/airpod.jpg",
     ),
   ];
 

@@ -1,13 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yabiso_ecommerce/di/appModule.dart';
+import 'package:yabiso_ecommerce/pages/home/home_page.dart';
 
-import 'core/fonts/util.dart';
-import 'core/themes/theme.dart';
+import '../core/fonts/util.dart';
+import '../core/themes/theme.dart';
 
 void main(){
   setup();
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Yabiso E-commerce',
       debugShowCheckedModeBanner: false,
       theme: brightness == Brightness.light ? theme.light() : theme.dark(),
-      home: Placeholder(),
+      home: HomePage(),
     );
   }
 }
